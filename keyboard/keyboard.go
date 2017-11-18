@@ -1,11 +1,12 @@
 package keyboard
 
 /*
+#include <stdint.h>
 #ifdef __WIN32
 #cgo CFLAGS:-nostdlib
-#include <stdint.h>
 #include <Windows.h>
-void PressButton(WORD key,byte value) {
+
+void SetKey(uint16_t key, uint8_t value) {
 	INPUT ip;
 
 	ip.type = INPUT_KEYBOARD;
@@ -29,12 +30,13 @@ import(
 )
 
 func SetKey(keyId uint16, value bool) {
-	var arg C.byte
+	C.SetKey(C.uint16_t(keyId),boolToByte(value));
+}
 
-	if value {
-		arg = 1
+func boolToByte(value bool) C.uint8_t {
+	if(value) {
+		return 1
 	} else {
-		arg = 0
+		return 0
 	}
-	C.PressButton(C.WORD(keyId),arg);
 }
