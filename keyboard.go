@@ -13,7 +13,7 @@ void PressButton(WORD key,byte value) {
 
 	ip.ki.wVk = key;
 	if (value) {
-		ip.ki.dwFlags = KEYEVENTF_KEYUP;
+		ip.ki.dwFlags = 0;
 	} else {
 		ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	}
