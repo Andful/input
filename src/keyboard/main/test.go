@@ -2,12 +2,11 @@ package main
 
 import (
 "keyboard"
-"time"
 )
 
 func main() {
-	time.Sleep(7000*time.Millisecond)
+	//time.Sleep(7000*time.Millisecond)
 
-	keyboard.SetKey(65,true)
-	keyboard.SetKey(65,false)
+	keyboard.SetKey(66,true)
+	keyboard.SetKey(66,false)
 }

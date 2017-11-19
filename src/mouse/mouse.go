@@ -29,29 +29,29 @@ void SetPosition(int32_t x,int32_t y) {
 #include <X11/Xutil.h>
 
 void Move(int32_t dx,int32_t dy) {
-    Display *displayMain = XOpenDisplay(NULL);
+    Display *display = XOpenDisplay(NULL);
 
-    if(displayMain == NULL) {
+    if(display == NULL) {
         exit(EXIT_FAILURE);
     }
 
-    XWarpPointer(displayMain, None, None, 0, 0, 0, 0, dx, dy);
+    XWarpPointer(display, None, None, 0, 0, 0, 0, dx, dy);
 
-    XCloseDisplay(displayMain);
+    XCloseDisplay(display);
 }
 
 void SetPosition(int32_t x,int32_t y) {
-	Display *displayMain = XOpenDisplay(NULL);
+	Display *display = XOpenDisplay(NULL);
 
-    if(displayMain == NULL) {
+    if(display == NULL) {
         exit(EXIT_FAILURE);
     }
 
-    Window root_window = XRootWindow(displayMain, 0);
+    Window root_window = XRootWindow(display, 0);
 
-    XWarpPointer(displayMain, None, root_window, 0, 0, 0, 0, x, y);
+    XWarpPointer(display, None, root_window, 0, 0, 0, 0, x, y);
 
-    XCloseDisplay(displayMain);
+    XCloseDisplay(display);
 }
 #endif
 */

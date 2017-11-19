@@ -24,10 +24,30 @@ void SetKey(uint16_t key, uint8_t value) {
 	SendInput(1, &ip, sizeof(INPUT));
 }
 #endif
+
+#ifdef __linux__
+#cgo LDFLAGS: -lX11 -lXtst
+#include <stdlib.h>
+#include <stdio.h> //TODO: REMOVE
+
+#include <X11/Xlib.h>
+#include <X11/keysym.h>
+#include <X11/extensions/XTest.h>
+
+void SetKey(uint16_t key, uint8_t value) {
+	Display *display;
+	display = XOpenDisplay(NULL);
+
+	if(display == NULL) {
+	    exit(EXIT_FAILURE);
+	}
+
+	XTestFakeKeyEvent(display,XKeysymToKeycode(display,key), value, 0);
+	XCloseDisplay(display);
+}
+#endif
 */
-import(
-	"C"
-)
+import "C"
 
 func SetKey(keyId uint16, value bool) {
 	C.SetKey(C.uint16_t(keyId),boolToByte(value));
