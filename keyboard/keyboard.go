@@ -3,7 +3,7 @@ package keyboard
 /*
 #include <stdint.h>
 #ifdef __WIN32
-#cgo CFLAGS:-nostdlib
+#cgo windows CFLAGS:-nostdlib
 #include <Windows.h>
 
 void SetKey(uint16_t key, uint8_t value) {
@@ -26,7 +26,7 @@ void SetKey(uint16_t key, uint8_t value) {
 #endif
 
 #ifdef __linux__
-#cgo LDFLAGS: -lX11 -lXtst
+#cgo linux LDFLAGS: -lX11 -lXtst
 #include <stdlib.h>
 
 #include <X11/Xlib.h>
