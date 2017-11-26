@@ -28,7 +28,6 @@ void SetKey(uint16_t key, uint8_t value) {
 #ifdef __linux__
 #cgo LDFLAGS: -lX11 -lXtst
 #include <stdlib.h>
-#include <stdio.h> //TODO: REMOVE
 
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
