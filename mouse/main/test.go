@@ -1,7 +1,7 @@
 package main
 
 import (
-"mouse"
+"github.com/Andful/input/mouse"
 "time"
 )
 

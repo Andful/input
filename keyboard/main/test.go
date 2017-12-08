@@ -1,7 +1,7 @@
 package main
 
 import (
-"keyboard"
+"github.com/Andful/input/keyboard"
 )
 
 func main() {
