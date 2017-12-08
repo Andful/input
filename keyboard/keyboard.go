@@ -2,6 +2,9 @@ package keyboard
 
 /*
 #include <stdint.h>
+#define OS_DOES_NOT_SUPPORT_BUTTON -1
+#define 
+
 #ifdef __WIN32
 #cgo windows CFLAGS:-nostdlib
 #include <Windows.h>
@@ -33,6 +36,10 @@ void SetKey(uint16_t key, uint8_t value) {
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
 
+int adjust(int keycode) {
+	return keycode + 8;
+}
+
 void SetKey(uint16_t key, uint8_t value) {
 	Display *display;
 	display = XOpenDisplay(NULL);
@@ -41,7 +48,7 @@ void SetKey(uint16_t key, uint8_t value) {
 	    exit(EXIT_FAILURE);
 	}
 
-	XTestFakeKeyEvent(display,XKeysymToKeycode(display,key), value, 0);
+	XTestFakeKeyEvent(display,adjust(get_keycode(key)), value, 0);
 	XCloseDisplay(display);
 }
 #endif
