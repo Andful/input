@@ -3,7 +3,7 @@ package keyboard
 /*
 #include <stdint.h>
 #define OS_DOES_NOT_SUPPORT_BUTTON -1
-#define 
+#define GENERAL_ERROR -2
 
 #ifdef __WIN32
 #cgo windows CFLAGS:-nostdlib
@@ -35,6 +35,8 @@ void SetKey(uint16_t key, uint8_t value) {
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
+
+#include "linux_keycode.h"
 
 int adjust(int keycode) {
 	return keycode + 8;
