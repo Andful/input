@@ -23,7 +23,9 @@ void SetPosition(int32_t x,int32_t y) {
 #ifdef __linux__
 #cgo LDFLAGS: -lX11
 
+#include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -54,13 +56,12 @@ void SetPosition(int32_t x,int32_t y) {
     XCloseDisplay(display);
 }
 
-void SetButton(int button,byte value){
+void SetButton(int button,uint8_t value){
     Display *display = XOpenDisplay(NULL);
 
     XEvent event;
     
-    if(display == NULL)
-    {
+    if(display == NULL) {
         exit(EXIT_FAILURE);
     }
     
@@ -82,7 +83,10 @@ void SetButton(int button,byte value){
             XQueryPointer(display, event.xbutton.window, &event.xbutton.root, &event.xbutton.subwindow, &event.xbutton.x_root, &event.xbutton.y_root, &event.xbutton.x, &event.xbutton.y, &event.xbutton.state);
         }
         
-        if(XSendEvent(display, PointerWindow, True, 0xfff, &event) == 0) fprintf(stderr, "Errore nell'invio dell'evento !!!\n");
+        if(XSendEvent(display, PointerWindow, True, 0xfff, &event) == 0) {
+			fprintf(stderr, "Errore nell'invio dell'evento !!!\n");
+			exit(EXIT_FAILURE);
+        }
         
     } else {
         event.type = ButtonRelease;
@@ -107,7 +111,7 @@ func Move(dx int,dy int){
 }
 
 func SetButton(button int, value bool){
-    C.SetButton(button,boolToByte(value))
+    C.SetButton(C.int(button),boolToByte(value))
 }
 
 func boolToByte(value bool) C.uint8_t {
